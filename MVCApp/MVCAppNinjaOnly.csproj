@@ -148,7 +148,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -175,6 +177,13 @@
     <Content Include="Views\Ninjas\ClanDetails.cshtml" />
     <Content Include="Views\Ninjas\DeleteClan.cshtml" />
     <Content Include="Views\Ninjas\EditClan.cshtml" />
+    <Content Include="Views\Ninjas\PostGrid.cshtml" />
+    <Content Include="Views\Ninjas\EditPost.cshtml" />
+    <Content Include="Views\Ninjas\DeletePost.cshtml" />
+    <Content Include="Views\Ninjas\CreateTopic.cshtml" />
+    <Content Include="Views\Ninjas\TopicGrid.cshtml" />
+    <Content Include="Views\Ninjas\EditTopic.cshtml" />
+    <Content Include="Views\Ninjas\DeleteTopic.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

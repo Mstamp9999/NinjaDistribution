@@ -34,6 +34,12 @@ namespace MVCApp.Controllers
             return View(ninjas.ToList());
         }
 
+        public ActionResult PostGrid()
+        {
+            var posts = db.Posts;
+            return View(posts.ToList());
+        }
+
         // GET: Ninjas/Details/5
         public ActionResult Details(int? id)
         {
@@ -76,6 +82,18 @@ namespace MVCApp.Controllers
             return View();
         }
 
+        public ActionResult CreatePost()
+        {
+            ViewBag.PostName = new SelectList(db.Posts, "TopicId", "PostID");
+            return View();
+        }
+
+        public ActionResult CreateTopic()
+        {
+            ViewBag.TopciId = new SelectList(db.Topics, "TopicId", "TopicSubject");
+            return View();
+        }
+
         // POST: Ninjas/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -112,6 +130,24 @@ namespace MVCApp.Controllers
             return View(clan);
         }
 
+        // POST: Ninjas/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreatePost([Bind(Include = "PostName,DateCreated,DateModified")] Post post)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Posts.Add(post);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.PostName = new SelectList(db.Clans, "Id", "PostName", post.PostText);
+            return View(post);
+        }
+
         // GET: Ninjas/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -143,6 +179,22 @@ namespace MVCApp.Controllers
             ViewBag.ClanId = new SelectList(db.Clans, "Clan", "ClanName", clan.ClanName);
 
             return View(clan);
+        }
+
+        public ActionResult EditPost(int? Post)
+        {
+            if (Post == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Post post = db.Posts.Find(Post);
+            if (post == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.PostId = new SelectList(db.Posts, "Post", "PostName", post.PostText);
+
+            return View(post);
         }
 
         // POST: Ninjas/Edit/5

@@ -57,6 +57,10 @@
     <Compile Include="Migrations\201608310039323_new_Ninja.Designer.cs">
       <DependentUpon>201608310039323_new_Ninja.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609062313509_Post.cs" />
+    <Compile Include="Migrations\201609062313509_Post.Designer.cs">
+      <DependentUpon>201609062313509_Post.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="NinjaContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -73,6 +77,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201608310039323_new_Ninja.resx">
       <DependentUpon>201608310039323_new_Ninja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609062313509_Post.resx">
+      <DependentUpon>201609062313509_Post.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
