@@ -33,8 +33,8 @@
             @Html.DisplayFor(modelItem => item.DateModified, "{0:d}")
         </td>
         <td>
-            @Html.ActionLink("Edit", "EditTopic", new { Topic=item.Id }) |
-            @Html.ActionLink("Delete", "DeleteTopic", new { id=item.Id })
+            @Html.ActionLink("Edit", "EditTopic", new { Topic=item.TopicId }) |
+            @Html.ActionLink("Delete", "DeleteTopic", new { id=item.TopicId })
         </td>
     </tr>
 }

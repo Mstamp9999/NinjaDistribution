@@ -18,8 +18,8 @@ namespace MVCApp.Controllers
         // GET: Ninjas
         public ActionResult Index()
         {
-            var ninjas = db.Ninjas.Include(n => n.Clan);
-            return View(ninjas.ToList());
+            var Ninjas = db.Ninjas;
+            return View(Ninjas.ToList());
         }
 
         public ActionResult NinjaGrid()
@@ -38,6 +38,12 @@ namespace MVCApp.Controllers
         {
             var posts = db.Posts;
             return View(posts.ToList());
+        }
+
+        public ActionResult TopicGrid()
+        {
+            var topics = db.Topics;
+            return View(topics.ToList());
         }
 
         // GET: Ninjas/Details/5
@@ -148,6 +154,24 @@ namespace MVCApp.Controllers
             return View(post);
         }
 
+        // POST: Ninjas/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateTopic([Bind(Include = "PostName,DateCreated,DateModified")] Topic topic)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Topics.Add(topic);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.PostName = new SelectList(db.Clans, "Id", "PostName", topic.TopicId);
+            return View(topic);
+        }
+
         // GET: Ninjas/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -197,6 +221,22 @@ namespace MVCApp.Controllers
             return View(post);
         }
 
+        public ActionResult EditTopic(int? Topic)
+        {
+            if (Topic == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Topic topic = db.Topics.Find(Topic);
+            if (topic == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.PostId = new SelectList(db.Posts, "topic", "TopicId", topic.TopicId);
+
+            return View(topic);
+        }
+
         // POST: Ninjas/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -230,6 +270,42 @@ namespace MVCApp.Controllers
             return View(clan);
         }
 
+        // POST: Ninjas/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditPost([Bind(Include = "Id,ClanName,DateCreated,DateModified")] Post post)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(post).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.PostID = new SelectList(db.Posts, "PostID", "TopicId", post);
+            return View(post);
+        }
+
+        // POST: Ninjas/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditTopic([Bind(Include = "Id,ClanName,DateCreated,DateModified")] Topic topic)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(topic).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.TopicId = new SelectList(db.Posts, "TopicId", "TopicSubject", topic);
+            return View(topic);
+        }
+
+
+
         // GET: Ninjas/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -259,6 +335,34 @@ namespace MVCApp.Controllers
             return View(clan);
         }
 
+        public ActionResult DeletePost(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Post post = db.Posts.Find(id);
+            if (post == null)
+            {
+                return HttpNotFound();
+            }
+            return View(post);
+        }
+
+        public ActionResult DeleteTopic(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Topic topic = db.Topics.Find(id);
+            if (topic == null)
+            {
+                return HttpNotFound();
+            }
+            return View(topic);
+        }
+
         // POST: Ninjas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -276,6 +380,26 @@ namespace MVCApp.Controllers
         {
             Clan clan = db.Clans.Find(id);
             db.Clans.Remove(clan);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost, ActionName("DeletePost")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeletePostConfirmed(int id)
+        {
+            Post post = db.Posts.Find(id);
+            db.Posts.Remove(post);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost, ActionName("DeleteTopic")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteTopicConfirmed(int id)
+        {
+            Topic topic = db.Topics.Find(id);
+            db.Topics.Remove(topic);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
