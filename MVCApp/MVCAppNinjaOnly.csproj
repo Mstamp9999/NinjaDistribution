@@ -184,6 +184,9 @@
     <Content Include="Views\Ninjas\TopicGrid.cshtml" />
     <Content Include="Views\Ninjas\EditTopic.cshtml" />
     <Content Include="Views\Ninjas\DeleteTopic.cshtml" />
+    <Content Include="Views\Ninjas\CreatePost.cshtml" />
+    <Content Include="Views\Ninjas\TopicDetails.cshtml" />
+    <Content Include="Views\Ninjas\PostDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

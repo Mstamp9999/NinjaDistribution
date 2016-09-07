@@ -75,6 +75,34 @@ namespace MVCApp.Controllers
             return View(clan);
         }
 
+        public ActionResult PostDetails(int? PostID)
+        {
+            if (PostID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Post post = db.Posts.Find(PostID);
+            if (post == null)
+            {
+                return HttpNotFound();
+            }
+            return View(post);
+        }
+
+        public ActionResult TopicDetails(int? TopicId)
+        {
+            if (TopicId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Topic topic = db.Topics.Find(TopicId);
+            if (topic == null)
+            {
+                return HttpNotFound();
+            }
+            return View(topic);
+        }
+
         // GET: Ninjas/Create
         public ActionResult Create()
         {
@@ -141,7 +169,7 @@ namespace MVCApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreatePost([Bind(Include = "PostName,DateCreated,DateModified")] Post post)
+        public ActionResult CreatePost([Bind(Include = "PostText,TopicId,DateCreated,DateModified")] Post post)
         {
             if (ModelState.IsValid)
             {
@@ -150,7 +178,7 @@ namespace MVCApp.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.PostName = new SelectList(db.Clans, "Id", "PostName", post.PostText);
+            ViewBag.PostText = new SelectList(db.Posts, "Id", "PostText", post.PostText);
             return View(post);
         }
 
@@ -159,7 +187,7 @@ namespace MVCApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateTopic([Bind(Include = "PostName,DateCreated,DateModified")] Topic topic)
+        public ActionResult CreateTopic([Bind(Include = "TopicId,DateCreated,DateModified")] Topic topic)
         {
             if (ModelState.IsValid)
             {
@@ -168,7 +196,7 @@ namespace MVCApp.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.PostName = new SelectList(db.Clans, "Id", "PostName", topic.TopicId);
+            ViewBag.TopicId = new SelectList(db.Topics, "TopicId", "TopicSubject", topic.TopicId);
             return View(topic);
         }
 
@@ -275,7 +303,7 @@ namespace MVCApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditPost([Bind(Include = "Id,ClanName,DateCreated,DateModified")] Post post)
+        public ActionResult EditPost([Bind(Include = "PostID,PostText,DateModified")] Post post)
         {
             if (ModelState.IsValid)
             {
@@ -283,7 +311,7 @@ namespace MVCApp.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.PostID = new SelectList(db.Posts, "PostID", "TopicId", post);
+            ViewBag.PostID = new SelectList(db.Posts, "PostID", "PostText", post);
             return View(post);
         }
 
@@ -292,7 +320,7 @@ namespace MVCApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditTopic([Bind(Include = "Id,ClanName,DateCreated,DateModified")] Topic topic)
+        public ActionResult EditTopic([Bind(Include = "TopicId,TopicSubject,DateCreated,DateModified")] Topic topic)
         {
             if (ModelState.IsValid)
             {

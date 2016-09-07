@@ -11,6 +11,7 @@ namespace NinjaDomain.Classes
         
         }
         public int PostID { get; set; }
+        public int TopicId { get; set; }
         public string PostText { get; set; }
         
         public DateTime DateCreated { get; set; }

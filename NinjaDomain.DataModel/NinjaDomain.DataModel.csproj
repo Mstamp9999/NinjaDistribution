@@ -61,6 +61,10 @@
     <Compile Include="Migrations\201609062313509_Post.Designer.cs">
       <DependentUpon>201609062313509_Post.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609070046558_newPost.cs" />
+    <Compile Include="Migrations\201609070046558_newPost.Designer.cs">
+      <DependentUpon>201609070046558_newPost.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="NinjaContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -80,6 +84,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609062313509_Post.resx">
       <DependentUpon>201609062313509_Post.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609070046558_newPost.resx">
+      <DependentUpon>201609070046558_newPost.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -18,6 +18,9 @@
         <th>
             @Html.DisplayNameFor(model => model.DateCreated)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateModified)
+        </th>
         <th></th>
     </tr>
 
@@ -34,6 +37,7 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "EditTopic", new { Topic=item.TopicId }) |
+            @Html.ActionLink("Details", "TopicDetails", new { TopicId=item.TopicId }) |
             @Html.ActionLink("Delete", "DeleteTopic", new { id=item.TopicId })
         </td>
     </tr>

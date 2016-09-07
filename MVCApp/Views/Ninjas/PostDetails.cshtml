@@ -1,0 +1,80 @@
+﻿@model NinjaDomain.Classes.Post
+
+@{
+  ViewBag.Title = "PostDetails";
+}
+
+<h2>Post Details</h2>
+
+<div>
+    <h4>Post</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PostID)
+        </dt>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TopicId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PostText)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+
+        <dt>
+
+            @Html.DisplayNameFor(model => model.DateModified)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateModified)
+       
+        </dd>
+    </dl>
+    <hr/>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PostID)
+        </dt>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TopicId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PostText)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+
+        <dt>
+
+            @Html.DisplayNameFor(model => model.DateModified)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateModified)
+       
+        </dd>
+
+        </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "EditPost", new { id = Model.PostID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
