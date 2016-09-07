@@ -81,6 +81,7 @@
 
         </dl>
 </div>
+@Html.Action("PostGrid", new { id = Model.TopicId });
 <p>
     @Html.ActionLink("Edit", "EditTopic", new { id = Model.TopicId }) |
     @Html.ActionLink("Back to List", "Index")

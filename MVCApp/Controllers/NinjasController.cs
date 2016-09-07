@@ -34,9 +34,9 @@ namespace MVCApp.Controllers
             return View(ninjas.ToList());
         }
 
-        public ActionResult PostGrid()
+        public ActionResult PostGrid(int? id)
         {
-            var posts = db.Posts;
+            var posts = db.Posts.Where(n => n.TopicId == id);
             return View(posts.ToList());
         }
 
